@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_school_project_form" model="ir.ui.view">
+        <field name="name">school.project.form</field>
+        <field name="model">school.project</field>
+        <field name="arch" type="xml">
+            <form string="Projet de Classe">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="club_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_project_tree" model="ir.ui.view">
+        <field name="name">school.project.tree</field>
+        <field name="model">school.project</field>
+        <field name="arch" type="xml">
+            <tree string="Projets">
+                <field name="name"/>
+                <field name="club_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school_club,access_school_club,model_school_club,base.group_user,1,1,1,1
+access_school_student,access_school_student,model_school_student,base.group_user,1,1,1,1
+access_school_event,access_school_event,model_school_event,base.group_user,1,1,1,1
+access_school_project,access_school_project,model_school_project,base.group_user,1,1,1,1
+access_school_elearning,access_school_elearning,model_school_elearning,base.group_user,1,1,1,1

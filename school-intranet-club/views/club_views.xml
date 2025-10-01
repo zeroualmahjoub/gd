@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_school_club_form" model="ir.ui.view">
+        <field name="name">school.club.form</field>
+        <field name="model">school.club</field>
+        <field name="arch" type="xml">
+            <form string="Club Scolaire">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="responsible_id"/>
+                        <field name="student_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Projets">
+                            <field name="project_ids"/>
+                        </page>
+                        <page string="Contenus e-Learning">
+                            <field name="content_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_club_tree" model="ir.ui.view">
+        <field name="name">school.club.tree</field>
+        <field name="model">school.club</field>
+        <field name="arch" type="xml">
+            <tree string="Clubs Scolaires">
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

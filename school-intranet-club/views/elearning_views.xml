@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_school_elearning_form" model="ir.ui.view">
+        <field name="name">school.elearning.form</field>
+        <field name="model">school.elearning</field>
+        <field name="arch" type="xml">
+            <form string="Contenu e-Learning">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="description"/>
+                        <field name="type"/>
+                        <field name="url"/>
+                        <field name="club_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_elearning_tree" model="ir.ui.view">
+        <field name="name">school.elearning.tree</field>
+        <field name="model">school.elearning</field>
+        <field name="arch" type="xml">
+            <tree string="Contenu e-Learning">
+                <field name="title"/>
+                <field name="type"/>
+                <field name="club_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

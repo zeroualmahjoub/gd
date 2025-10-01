@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="menu_school_root" name="École"/>
+    <menuitem id="menu_school_club" name="Clubs" parent="menu_school_root"/>
+
+    <act_window id="action_school_club"
+                name="Clubs Scolaires"
+                res_model="school.club"
+                view_mode="tree,form"
+                menu_id="menu_school_club"/>
+</odoo>
