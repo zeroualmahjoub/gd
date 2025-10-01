@@ -1,0 +1,21 @@
+{
+    'name': 'School Club Portal',
+    'version': '2.0',
+    'category': 'Education',
+    'summary': 'Gestion complète des clubs scolaires avec projets, e-learning, quiz et badges',
+    'depends': ['base', 'website', 'portal'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/badge_data.xml',
+        'views/club_views.xml',
+        'views/badge_views.xml',
+        'views/quiz_views.xml',
+        'views/project_views.xml',
+        'views/elearning_views.xml',
+        'views/menu.xml',
+        'views/templates.xml',
+    ],
+    'installable': True,
+    'application': True,
+}

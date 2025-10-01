@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Portail : Liste des clubs -->
+    <template id="portal_club_list" name="My Clubs" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2>My Clubs</h2>
+                <t t-if="clubs">
+                    <div class="row">
+                        <t t-foreach="clubs" t-as="club">
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><t t-esc="club.name"/></h5>
+                                        <p class="card-text"><t t-esc="club.description or ''"/></p>
+                                        <a t-attf-href="/club/{{ club.id }}" class="btn btn-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-else="">
+                    <p>You are not a member of any club.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <!-- Détail du club -->
+    <template id="portal_club_detail" name="Club Detail" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <a href="/my/clubs" class="btn btn-secondary mb-3">← Back to My Clubs</a>
+                <h2><t t-esc="club.name"/></h2>
+                <p><strong>Responsible:</strong> <t t-esc="club.responsible_id.name"/></p>
+                <p><t t-esc="club.description or ''"/></p>
+
+                <!-- Boutons -->
+                <t t-if="club.responsible_id != request.env.user and request.env.user not in club.member_ids">
+                    <a t-attf-href="/club/{{ club.id }}/join" class="btn btn-success mb-3">Join this Club</a>
+                </t>
+                <t t-if="club.responsible_id != request.env.user and request.env.user in club.member_ids">
+                    <div class="mb-3">
+                        <a t-attf-href="/club/{{ club.id }}/quiz" class="btn btn-info">Take Quiz</a>
+                        <a t-attf-href="/club/{{ club.id }}/content" class="btn btn-outline-primary mx-2">E-Learning</a>
+                        <a t-attf-href="/club/{{ club.id }}/projects" class="btn btn-outline-secondary">Projects</a>
+                    </div>
+                </t>
+
+                <h4>Members</h4>
+                <ul>
+                    <t t-foreach="club.member_ids" t-as="member">
+                        <li><t t-esc="member.name"/></li>
+                    </t>
+                </ul>
+            </div>
+        </t>
+    </template>
+
+    <!-- Formulaire de quiz -->
+    <template id="quiz_form" name="Take Quiz" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h2>Quiz: <t t-esc="quiz.name"/></h2>
+                <p><strong>Question:</strong> <t t-esc="quiz.question"/></p>
+                <form method="post">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer" value="a" id="optA" required=""/>
+                        <label class="form-check-label" for="optA"><t t-esc="quiz.option_a"/></label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer" value="b" id="optB"/>
+                        <label class="form-check-label" for="optB"><t t-esc="quiz.option_b"/></label>
+                    </div>
+                    <t t-if="quiz.option_c">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answer" value="c" id="optC"/>
+                            <label class="form-check-label" for="optC"><t t-esc="quiz.option_c"/></label>
+                        </div>
+                    </t>
+                    <t t-if="quiz.option_d">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answer" value="d" id="optD"/>
+                            <label class="form-check-label" for="optD"><t t-esc="quiz.option_d"/></label>
+                        </div>
+                    </t>
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <!-- Résultat du quiz -->
+    <template id="quiz_result" name="Quiz Result" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4 text-center">
+                <h2>
+                    <t t-if="passed">🎉 Congratulations! You passed!</t>
+                    <t t-else="">❌ Try again next time!</t>
+                </h2>
+                <a t-attf-href="/club/{{ club.id }}" class="btn btn-secondary mt-3">Back to Club</a>
+            </div>
+        </t>
+    </template>
+
+    <!-- Pas de quiz -->
+    <template id="quiz_no_quiz" name="No Quiz" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4 text-center">
+                <h2>No quiz available for this club yet.</h2>
+                <a t-attf-href="/club/{{ club.id }}" class="btn btn-secondary">Back to Club</a>
+            </div>
+        </t>
+    </template>
+
+    <!-- Contenu e-learning -->
+    <template id="elearning_content_list" name="E-Learning Content" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <a t-attf-href="/club/{{ club.id }}" class="btn btn-secondary mb-3">← Back to Club</a>
+                <h2>E-Learning Content</h2>
+                <t t-if="contents">
+                    <div class="list-group">
+                        <t t-foreach="contents" t-as="content">
+                            <div class="list-group-item">
+                                <h5><t t-esc="content.name"/></h5>
+                                <p><span class="badge bg-info"><t t-esc="content.content_type"/></span></p>
+                                <p><t t-esc="content.description or ''"/></p>
+                                <t t-if="content.url">
+                                    <a t-attf-href="{{ content.url }}" target="_blank" class="btn btn-sm btn-outline-primary">Open</a>
+                                </t>
+                                <t t-if="content.quiz_id">
+                                    <a t-attf-href="/club/{{ club.id }}/quiz" class="btn btn-sm btn-success mx-2">Take Quiz</a>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-else="">
+                    <p>No content available.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <!-- Projets -->
+    <template id="project_list" name="Club Projects" page="True">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <a t-attf-href="/club/{{ club.id }}" class="btn btn-secondary mb-3">← Back to Club</a>
+                <h2>Projects</h2>
+                <t t-if="projects">
+                    <div class="row">
+                        <t t-foreach="projects" t-as="project">
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><t t-esc="project.name"/></h5>
+                                        <p><t t-esc="project.description or ''"/></p>
+                                        <small>
+                                            <t t-if="project.start_date">From: <t t-esc="project.start_date"/> </t>
+                                            <t t-if="project.end_date">To: <t t-esc="project.end_date"/></t>
+                                        </small>
+                                        <h6>Tasks:</h6>
+                                        <ul>
+                                            <t t-foreach="project.task_ids" t-as="task">
+                                                <li>
+                                                    <t t-esc="task.name"/> 
+                                                    <span t-attf-class="badge bg-{{ 'success' if task.state == 'done' else 'warning' if task.state == 'in_progress' else 'secondary' }}">
+                                                        <t t-esc="dict(task._fields['state'].selection).get(task.state)"/>
+                                                    </span>
+                                                </li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-else="">
+                    <p>No projects yet.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

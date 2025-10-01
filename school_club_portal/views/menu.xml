@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_school_club_root" name="School Clubs" sequence="10"/>
+    <menuitem id="menu_school_club" name="Clubs" parent="menu_school_club_root" action="action_school_club"/>
+    <menuitem id="menu_school_project" name="Projects" parent="menu_school_club_root" action="action_club_project"/>
+    <menuitem id="menu_elearning_content" name="E-Learning" parent="menu_school_club_root" action="action_elearning_content"/>
+    <menuitem id="menu_school_quiz" name="Quizzes" parent="menu_school_club_root" action="action_school_quiz"/>
+    <menuitem id="menu_school_badge" name="Badges" parent="menu_school_club_root" action="action_school_badge"/>
+</odoo>

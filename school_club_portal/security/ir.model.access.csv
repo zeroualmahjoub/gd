@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_school_club_user,access.school.club.user,model_school_club,,1,0,0,0
+access_school_club_manager,access.school.club.manager,model_school_club,school_club_portal.group_club_manager,1,1,1,1
+access_school_badge,access.school.badge,model_school_badge,,1,1,1,1
+access_school_quiz,access.school.quiz,model_school_quiz,,1,1,1,1
+access_club_project,access.club.project,model_school_club_project,,1,1,1,1
+access_club_task,access.club.task,model_school_club_task,,1,1,1,1
+access_elearning_content,access.elearning.content,model_school_elearning_content,,1,1,1,1

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_club_manager" model="res.groups">
+        <field name="name">Club Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <!-- Règle : Club -->
+    <record id="school_club_rule" model="ir.rule">
+        <field name="name">Club: Own clubs only</field>
+        <field name="model_id" search="[('model','=','school.club')]"/>
+        <field name="domain_force">
+            ['|',
+                ('responsible_id', '=', user.id),
+                ('member_ids', 'in', [user.id])
+            ]
+        </field>
+    </record>
+
+    <!-- Règle : Projets -->
+    <record id="rule_project_club_access" model="ir.rule">
+        <field name="name">Project: Own club only</field>
+        <field name="model_id" search="[('model','=','school.club.project')]"/>
+        <field name="domain_force">
+            ['|',
+                ('club_id.responsible_id', '=', user.id),
+                ('club_id.member_ids', 'in', [user.id])
+            ]
+        </field>
+    </record>
+
+    <!-- Règle : Tâches -->
+    <record id="rule_task_club_access" model="ir.rule">
+        <field name="name">Task: Own club only</field>
+        <field name="model_id" search="[('model','=','school.club.task')]"/>
+        <field name="domain_force">
+            ['|',
+                ('project_id.club_id.responsible_id', '=', user.id),
+                ('project_id.club_id.member_ids', 'in', [user.id])
+            ]
+        </field>
+    </record>
+
+    <!-- Règle : E-Learning -->
+    <record id="rule_elearning_club_access" model="ir.rule">
+        <field name="name">E-Learning: Own club only</field>
+        <field name="model_id" search="[('model','=','school.elearning.content')]"/>
+        <field name="domain_force">
+            ['|',
+                ('club_id.responsible_id', '=', user.id),
+                ('club_id.member_ids', 'in', [user.id])
+            ]
+        </field>
+    </record>
+</odoo>

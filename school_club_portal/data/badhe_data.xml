@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="badge_default_success" model="school.badge">
+        <field name="name">Quiz Master</field>
+        <field name="description">Awarded for passing a club quiz!</field>
+    </record>
+</odoo>
